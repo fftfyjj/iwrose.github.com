@@ -1,0 +1,172 @@
+--- 
+status: publish
+tags: 
+- Markdown
+layout: post
+published: true
+title: !binary |
+  TWFya2Rvd27lrabkuaDnrJTorrA=
+
+meta: 
+  posturl_add_url: "yes"
+  _edit_last: "1"
+type: post
+---
+
+<blockquote>这是前段时间学习Markdown时记录的笔记，该语法与Mou编辑器兼容</blockquote>
+
+
+<h1>Markdown学习笔记</h1>
+<blockquote>注意一点，不要在块级HTML元素内使用Markdown格式化命令，Markdown不会处理它们。比如你不要
+在一个HTML块中使用 <em>emphasis</em> 这样的Markdown格式化命令。
+
+<!--more-->
+
+Markdown中，以下字符支持使用反斜线转义：
+<blockquote>\ 反斜线
+
+` 反引号
+
+* 星号
+
+_ 下划线
+
+{} 大括号
+
+[] 中括号
+
+() 小括号
+
+# 井号
+
++ 加号
+
+- 减号（连字符）
+
+. 句点
+
+! 感叹号</blockquote>
+</blockquote>
+<h2>块级元素</h2>
+<blockquote>注意，该类元素前后得有空行隔开。</blockquote>
+<h3>段落与换行</h3>
+段落间用一个～多个空行隔开。
+
+换行用&gt;2个空格加换行符隔开。
+<h3>标题</h3>
+有2种风格Setext与atx。
+<h3>引用块</h3>
+用邮件列表种的&gt;表示。
+<h3>列表</h3>
+<ul>
+	<li>无序用+、-、*加空格表示。</li>
+	<li>有序用 数字 加 . 加 空格 表示。</li>
+</ul>
+注意，如果每条列表包含多段内容，则每段开始前必须加tab或4个空格
+<h3>代码块</h3>
+代码块的书写很方便。每行前面tab就可以。发现不能支持<em>中文</em>（现在看来是之前的markdown pro软件本身的问题，用Mou的话非常的ok)。
+<pre><code>#include&lt;stdio.h&gt; void main(){ printf("Hello world."); return; } </code></pre>
+<h3>Fenced代码块</h3>
+用包含三个反引号的line括起来表示. <del>实际上我觉得这就是行内代码的一种，只是书写时变化了点而已。</del>
+
+修正：的确与行内代码是不同的。 应该是代码段的一种更加方便的书写方法。
+
+另外，注意，该符号的书写必须满足两条件：<span style="color: red;"><em>1. 前面必须空一行 2. 前后符号必须各占单独的一行。</em></span>
+<h3>水平线</h3>
+用3个以上-、*就会得到水平线，如：
+
+<hr />
+
+<h3>Tables的书写</h3>
+<pre><code>First Header|Second Header|Third Header :-----------|:-----------:|:---------- 第一项 |第二项 |第三项 第四项|第五项|第六项 </code></pre>
+<blockquote>上面的这段文字，在Mou中的解释与github或Markdown Pro中的不同。</blockquote>
+<table>
+<thead>
+<tr>
+<th align="left">First Header</th>
+<th align="center">Second Header</th>
+<th align="left">Third Header</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">第一项</td>
+<td align="center">第二项</td>
+<td align="left">第三项</td>
+</tr>
+<tr>
+<td align="left">第四项</td>
+<td align="center">第五项</td>
+<td align="left">第六项</td>
+</tr>
+</tbody>
+</table>
+<blockquote>冒号表示对齐。可以写的好看点，但是为了大字方便，是没必要的。</blockquote>
+<h2>行级元素</h2>
+<h3>链接</h3>
+分为:
+* 行内链接 如: <a title="我是title" href="http://www.baidu.com">百度</a>。即，格式为: <a title="标题" href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接文本</a>
+* 引用链接
+<blockquote>还有种自动链接，直接用&lt; &gt;包含起来。如：<a href="http://www.baidu.com">http://www.baidu.com</a> 。注意，必须写http。
+
+书写Email的话也用这种自动连接的方式：<a href="mailto:xxx@126.com">xxx@126.com</a>。</blockquote>
+<h3>强调</h3>
+使用 *、<em> 表示强调。如 </em>xx_。
+
+上面是斜体强调，还有种粗体强调用<code>**xx**, __xx__</code>的方法表示。
+可以用\符号来转义。
+<h3>删除线</h3>
+使用2个～～符号包括起来表示。如：<del>我是要被删除的。</del>
+<h3>行内代码</h3>
+用反引号来包含起来。
+<blockquote>要在一个行内代码中使用反引号（`）本身，用多个反引号作为定界符包住它：
+
+``There is a literal backtick (`) here.``</blockquote>
+<h3>图片</h3>
+<ul>
+	<li>行内图片
+
+<code>![Alt text](/path/to/img.jpg)</code>
+
+<code>![Alt text](/path/to/img.jpg "Optional title")</code></li>
+	<li>引用图片
+
+<code>![Alt text][id]</code>
+
+<code>[id]: url/to/image "Optional title attribute"</code></li>
+</ul>
+<h2>补充知识</h2>
+MultiMarkdown针对Markdown的某些缺失的功能，所设计的超集。
+
+支持的语法有：
+<blockquote>
+<ul>
+	<li>footnotes</li>
+	<li>tables</li>
+	<li>citations and bibliography (works best in LaTeX using BibTeX)</li>
+	<li>math support</li>
+	<li>automatic cross-referencing ability</li>
+	<li>smart typography, with support for multiple languages</li>
+	<li>image attributes</li>
+	<li>table and image captions</li>
+	<li>definition lists</li>
+	<li>glossary entries (LaTeX only)</li>
+	<li>document metadata (e.g. title, author, date, etc.)</li>
+</ul>
+</blockquote>
+另外，Markdown Extra也是类似的Markdown超集。
+支持的语法有：
+<blockquote>
+<ul>
+	<li>Inline HTML</li>
+	<li>Markdown Inside HTML Blocks</li>
+	<li>Header Id Attribute</li>
+	<li>Fenced Code Blocks</li>
+	<li>Tables</li>
+	<li>Definition Lists</li>
+	<li>Footnotes</li>
+	<li>Abbreviations</li>
+	<li>Emphasis</li>
+	<li>Backslash Escapes</li>
+</ul>
+</blockquote>

@@ -1,0 +1,85 @@
+--- 
+status: publish
+tags: 
+- Emacs
+layout: post
+published: true
+title: !binary |
+  R05VIEVtYWNzIE1hbnVhbCDkuYvliJ3mrKHpmIXor7sg77yI5Lmd77yJ
+
+meta: 
+  _edit_last: "1"
+  posturl_add_url: "yes"
+type: post
+---
+Registers这一节倒是新鲜，之前用的很少，但是得了解，以后用处还是很大的。
+<strong>Save Position to Registers:
+</strong>C-x r SPC R 其中，R表示寄存器名，字母或数字，a-zA-Z0-9。 point-to-register
+C-x r j R jump-to-register
+记忆诀窍：C-x r表示对register进行操作， SPC表示操作对象是position of point, 而C-SPC表示mark point，用SPC表示记录position倒是很合适。
+
+<strong>Saving Text to Registers:
+</strong>C-x r s R :copy-to-register 保存文本到register  记忆s:save
+C-x r i R :insert-register 插入register到buffer
+M-x append-to-register
+M-x prepend-to-register
+<!--more-->
+
+<blockquote>`C-x r i R' inserts in the buffer the text from register R.
+Normally it leaves point before the text and sets the mark after,
+without activating it.  With a numeric argument, it instead puts point
+after the text and the mark before.
+</blockquote>
+
+
+<strong>Saving rectangles to registers:
+</strong>C-x r r R: copy-rectangle-to-register 其实这节内容和之前的rectangle C-x r d/k/y/t等操作很容易弄混。不过，努力记吧，谁让register和rectangle的名字都是r开头呢。
+C-x r i R:同上。不过这个插的是rectangle,上面插的是text
+
+<strong>Saving Window Configurations to Registers:
+</strong>C-x r w R: window-configuration-to-register
+C-x r f R: frame-configuration-to-register
+C-x r j R:同上，上面是跳转到point, 这个是跳转到window or frame configuration.
+
+<strong>Keeping Numbers in Registers:
+</strong>C-u Number C-x r n R number-to-register
+C-u Number C-x r + R increment-register
+C-x r i R: instert-register
+
+<strong>Keeping File names in registers:
+</strong>如果经常在emacs对某文件操作（如，linux下某配置文件），可以在emacs的register中存下该文件的路径，便于用C-x r j R快捷打开该文件。
+Lisp code：
+(set-register ?R '(file . NAME))
+
+<strong>Bookmarks:
+</strong>bookmark的操作非常类似于对特殊的register的操作，
+C-x r m BOOKMARK: bookmark-set
+C-x r b BOOKMARK: bookmark-jump
+C-x r l list-bookmarks
+M-x bookmark-save:保存bookmark到硬盘文件中
+
+ 
+
+<blockquote>  Here are some additional commands for working with bookmarks:
+
+`M-x bookmark-load <RET> FILENAME <RET>'
+     Load a file named FILENAME that contains a list of bookmark
+     values.  You can use this command, as well as `bookmark-write', to
+     work with other files of bookmark values in addition to your
+     default bookmark file.
+
+`M-x bookmark-write <RET> FILENAME <RET>'
+     Save all the current bookmark values in the file FILENAME.
+
+`M-x bookmark-delete <RET> BOOKMARK <RET>'
+     Delete the bookmark named BOOKMARK.
+
+`M-x bookmark-insert-location <RET> BOOKMARK <RET>'
+     Insert in the buffer the name of the file that bookmark BOOKMARK
+     points to.
+
+`M-x bookmark-insert <RET> BOOKMARK <RET>'
+     Insert in the buffer the _contents_ of the file that bookmark
+     BOOKMARK points to.</blockquote>
+
+

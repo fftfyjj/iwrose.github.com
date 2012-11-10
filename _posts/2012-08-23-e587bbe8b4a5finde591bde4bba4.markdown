@@ -1,0 +1,67 @@
+---
+comments: true
+date: 2012-08-23 21:13:29
+layout: post
+slug: '%e5%87%bb%e8%b4%a5find%e5%91%bd%e4%bb%a4'
+title: 击败find命令
+wordpress_id: 48
+categories:
+- Linux
+tags:
+- Linux
+---
+
+**对**于find命令，不得不说点心理感受。想第一次学习到find命令的时候，我就被当时所看到的无比长的man文档与复杂的解释所吓到。于是，find就此被束之高阁，直到今天。
+
+GNU有个关于findutils包的文档，文档那么多页，却只讲了4个命令：find, locate, updatedb, xargs。其中，find作为其中最复杂的命令，占了绝大篇幅。
+刚开始，想从读man手册来入手，搞定find命令。然而，还是被长篇的英文文字恐吓到。主要是心理没点底，再加上是英文的话，更是恐慌。于是，走捷径，百度下看有无比较经典的关于find的学习笔记。运气不错，还真找到了。博主总结的很条理，将find命令的构成细致的分为：f`ind [option] [path] [test-expression] [action-expression] `四部分构成。这样一来，脑中倒是豁然开朗，再看man文档就轻松多了。
+说到这里，我得补充点：我发现对于新知识的理解，实际上是建立在对新知识的分类上的。能否将新遇到的知识归纳分类，与自己头脑中的旧知识结合是关键。
+
+下面我自己看man文档，然后总结：
+这是man文档中对find命令的语法定义：
+`find [-H] [-L] [-P] [-D debugopts] [-Olevel] [path...] [expression]`
+
+**5个Options：
+**-H: Not Follow symbolic link.
+-L: Follow symbolic link.
+-P: Never follow symbolic link.
+-D: Debug information
+-O: level 0-3
+
+**Test Expression:
+**测试表达式的作用是：通过一系列的属性限定，来过滤得到最终的目标文件。
+主要有几大类别的测试表达式：
+_1. 时间限定_
+atime
+ctime
+mtime
+amin
+cmin
+mmin
+anewer
+cnewer
+newer
+
+_2. 文件大小限定_
+empty
+size
+
+_3. 文件的种类限定_
+executable
+type
+writeable
+
+_4. 所有者限定_
+gid
+user
+group
+uid
+
+**Action Expression:**
+告诉命令找到结果后该做什么。
+-delete
+-exec
+-print
+
+最后，有点要注意的：关于find的命令，有个配套的命令xargs，它结合find命令能够更加的加强find对找到的结果的处理操作。
+上面总结的这个分类中，每条具体的Option的意思不打算写出了。我觉得既然所总结，就不要做的太细致，留下点思考的空间很有必要。忘记时可以通过man手册来温习。

@@ -1,0 +1,97 @@
+--- 
+status: publish
+tags: 
+- Kickstart
+- Linux
+- PXE
+- RHEL
+layout: post
+published: true
+title: !binary |
+  UFhF5pa55byP5a6J6KOFUkhFTCA2LjM=
+
+meta: 
+  posturl_add_url: "yes"
+  _edit_last: "1"
+type: post
+---
+<strong>PXE安装一句话原理</strong>
+PXE网络安装是让在同一局域网中的一个或多个主机们利用机器自带的PXE功能， 通过该网络中某台提供PXE网络安装服务的主机来实现系统安装。
+<strong>安装需要的前提条件</strong>
+如果不满足这些条件，这篇文章就只有参考学习意义，无指导作用：
+1. 需要至少2台机器在同一局域网，除了一台或多台需要安装系统的机器，即客户端。还必需有一台提供TFTP，DHCP服务，以及ftp或http或nfs服务的机器，即服务器端。
+2. 客户端机器的网卡自带PXE, BIOS中支持PXE启动。
+<!--more-->
+<strong>PXE安装的原理详解</strong>
+1. 客户端通过PXE启动后，会自动的搜索局域网中的DHCP服务器，获取ip。
+2. 通过DHCP的配置文件，得到服务器端机器的ip, 然后利用tftp服务，从服务器端获得 开始RHEL安装所需引导文件，例如, pxelinux.0, vmlinuz, initrd.img等文件。
+3. 运行这些引导文件，即一个非常几本的“小Linux”系统。到这一步，实际已经完成了PXE所要做的所有工作。这前3步所完成的工作与直接用RHCE引导cd插入电脑光驱运行所达到的效果一样。
+4. 按照步骤开始安装，在选择安装介质那一步，选择NFS(如果服务其端是通过NFS服务共享的RHEL6完整DVD安装文件)或URL(服务器通过Ftp或http服务提供的安装文件共享)。
+5. 填写好提供nfs或ftp或http服务器端的ip地址等信息，继续下一步则该“小linux”系统会从服务器端获取RHEL6 DVD中的数据重新加载运行接下来的安装与配置。如果在第3步的小Linux运行后，选择安装方式时，给kernal附加一个ks="XXXks.cfg文件地址XX"或者在服务器端的default文件中填写好相关信息(具体如何填写请看下文)，则可以实现Kickstart全自动无人值守安装。
+6.剩下的都简单啦，此文不解释。
+
+客户端的PXE如何弄，由于机器不同，BIOS什么的都不同，可以自己搜索。只要硬件支持，实现PXE启动很简单，在此不作介绍。
+
+<strong>下面，重点介绍下服务器端的配置：</strong>
+服务器端主要要实现至少3中服务：a. DHCP服务 b. TFTP服务，该服务配合DHCP服务完成上面所说的前3个步骤。 c.ftp,http,nfs三种中的一种服务，该服务结合DHCP服务完成上述的后面几步的安装，它主要是用来让客户端的“小Linux”实现网络安装。 d.可选。ftp,http服务中的一种，用来共享kickstart ks.cfg文件，实现kickstart自动安装。
+
+<strong>1. 安装DHCP服务并配置：</strong>
+安装命令：yum install dhcp
+备注：如果你发现你运行yum命令无法实现安装，则表明你需要配置yum安装源。推荐利用RHEL6 DVD光盘或iso文件制成本地yum源，具体如何做，百度上就有不少文章介绍。
+安装中遇到：我用该命令安装时，出错，提示我dhcp的man文件与已经安装的dhclient包冲突。
+如何解决：a. 卸载dhclient。发现dhclient是有用的，故没卸载。不成功。 b. 直接找到dhcp rpm包，rmp -ivh安装。成功。
+何原因：不知道。不清楚为什么会冲突。
+配置dhcp：
+生成dhcpd.conf文件： <code>find /usr -name "dhcpd.conf.sample" -exec cp -p {} /etc/dhcp/dhcpd.conf \;</code>
+在dhcpd.conf文件中加入下面内容：
+<code>ddns-update-style interim;
+ignore client-updates;
+next-server 192.168.1.103; #服务器端ip地址，根据个人电脑自己修改
+filename "pxelinux.0";
+subnet 192.168.1.0 netmask 255.255.255.0 {
+option routers 192.168.1.103; #可能可以不用这一行。没试过
+option subnet-mask 255.255.255.0;
+range 192.168.1.200 192.168.1.220;
+default-lease-time 600;
+max-lease-time 7200;
+}</code>
+上面的子网ip与你的局域网要相同。
+启动dhcp服务：
+<code>/etc/init.d/dhcpd start</code>
+
+<strong>2. NFS服务与安装源部署(实际上即是共享RHEL6.3 DVD的内容。)</strong>
+安装NFS: <code>yum install nfs*</code>
+启动服务：/etc/init.d/rpcbind start
+配置安装源：echo "/media/cdrom *(sysnc,ro)" &gt;&gt; /etc/exports
+备注：/media/cdrom里面即是RHEL DVD里的内容。将iso文件挂在在/media/cdrom即可， mount -r -o loop RHEL6.3.iso /media/cdrom。
+启动nfs服务：/etc/init.d/nfs start
+
+<strong>3. TFTP服务与PXE相关部署</strong>
+安装TFTP：<code>yum install tftp-server</code>
+启动TFTP服务： <code>chkconfig tftp on; /etc/init.d/xinetd restart</code>
+<code>部署PXE相关文件：
+mkdir /var/lib/tftpboot/pxelinux.cfg
+cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/
+cp /media/cdrom/images/pxeboot/{vmlinuz,initrd.img} /var/lib/tftpboot/
+cp /media/cdrom/isolinux/isolinux.cfg /var/lib/tftpboot/pxelinux.cfg/default
+cp /media/cdrom/isolinux/vesamenu.c32 /var/lib/tftpboot/</code>
+接下来配置default文件(如果不需要Kickstart无人安装，该步省略)
+编辑default文件部分内容为：
+<code>label linux
+menu label ^Install or upgrade an existing system
+menu default
+kernel vmlinuz
+append initrd=initrd.img ks=http://192.168.1.103/ks.cfg</code>
+最后一行为添加的数据。
+
+<strong>4. http服务与ks.cfg (如果不需要Kickstart无人安装，该步省略)</strong>
+安装http:<code> yum install httpd*</code>
+部署：将ks.cfg文件放入/var/www/html/文件夹中。ks.cfg文件的访问路径即为:http://192.168.1.103/ks.cfg
+启动服务：<code>/etc/init.d/httpd start</code>
+
+&nbsp;
+
+<strong>最后，</strong>服务器端关闭防火墙，让客户端PXE启动，则可以开始PXE安装RHEL 6的美妙过程。如果不关闭防火墙，可能无法成功。
+system-config-firewall命令配置防火墙。
+
+OK，终于搞定写完这篇文章了。2个多小时才搞定的记录文章。:) 收工！

@@ -1,0 +1,55 @@
+--- 
+status: publish
+tags: 
+- Emacs
+layout: post
+published: true
+title: !binary |
+  R05VIEVtYWNzIE1hbnVhbCDkuYvliJ3mrKHpmIXor7sg77yI5LqU77yJ
+
+meta: 
+  _edit_last: "1"
+  posturl_add_url: "yes"
+type: post
+---
+这篇文章就记录下关于Minibuffer的内容。
+<strong>minibuffer中可以使用到的命令有：
+</strong>C-o 可以用于扩充minibuffer的大小。
+C-q
+C-x o
+C-a
+C-k
+C-y
+C-M-v可以用于scroll帮助窗口。
+
+<strong>minibuffer中补全操作种类及详解：
+</strong><!--more-->
+
+<blockquote>usually TAB, RET, and SPC) are rebound in the minibuffer to special completion commands.
+`TAB'
+     Complete the text in the minibuffer as much as possible; if unable
+     to complete, display a list of possible completions
+     (`minibuffer-complete').
+
+`SPC'
+     Complete up to one word from the minibuffer text before point
+     (`minibuffer-complete-word').  This command is not available for
+     arguments that often include spaces, such as file names.
+
+`RET'
+     Submit the text in the minibuffer as the argument, possibly
+     completing first (`minibuffer-complete-and-exit').  *Note
+     Completion Exit::.
+
+`?'
+     Display a list of completions (`minibuffer-completion-help').</blockquote>
+
+
+<strong>minibuffer中对history的操作：
+</strong>通过M-p M-n可以对minibuffer history进行操作。M-r M-s对minibuffer history进行搜索。
+
+<strong>另外：
+</strong>相比与C-x z的重复命令操作，针对minibuffer C-x ESC ESC可以同样重复命令。
+M-x list-command-history可以列举所以minibuffer中输入的命令历史，注意，只是针对minibuffer。
+
+在minibuffer中输入密码时，可以使用c-u(一般输入状态下无法使用)

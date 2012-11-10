@@ -1,0 +1,28 @@
+---
+comments: true
+date: 2012-11-02 14:35:54
+layout: post
+slug: '%e5%85%b3%e4%ba%8ewin-8%e7%b3%bb%e7%bb%9f%e7%9a%84%e4%b8%80%e4%ba%9b%e4%b8%aa%e4%ba%ba%e5%ae%9a%e5%88%b6%e5%92%8c%e8%b5%84%e6%ba%90-%ef%bc%88%e4%b8%8d%e5%ae%9a%e6%97%b6%e6%9b%b4%e6%96%b0%ef%bc%89'
+title: 关于Win 8系统的一些个人定制和资源 （不定时更新）
+wordpress_id: 183
+categories:
+- Resource
+tags:
+- Win 8
+---
+
+**系统定制：**
+
+** 键盘布局修改： **
+
+**1）修改注册表 **
+
+**2）利用AutoHotKey工具 **
+
+**资源链接： **
+
+**[http://www.win8mi.com/](http://www.win8mi.com/) 关于win 8的一个网站**
+
+** [https://www.dreamspark.com/Default.aspx](https://www.dreamspark.com/Default.aspx) 一个免费获取正版软件的途径**
+
+

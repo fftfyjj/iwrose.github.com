@@ -1,0 +1,80 @@
+--- 
+status: publish
+tags: 
+- Emacs
+layout: post
+published: true
+title: !binary |
+  R05VIEVtYWNzIE1hbnVhbCDkuYvliJ3mrKHpmIXor7sg77yI5Y2B5LiA77yJ
+
+meta: 
+  _edit_last: "1"
+  posturl_add_url: "yes"
+type: post
+---
+终于开始学Search这一节了，为自己的坚持鼓励下吧。
+Searching and Replacement
+
+四种Search类型：Incremental Search, Nonincremental Search, Word search, Regexp Search.接下来会具体分类介绍。
+
+<strong>Incremental Search:
+</strong>C-s isearch-forward
+C-r isearch-backward
+
+DEL删除错误的输入字符。
+RET停止搜索。另外，任何和搜索没有关系的命令也都可以stop search。当exit search的时候，会自动把当前point保存到mark ring中，使用C-u C-@跳转。
+<!--more-->
+在搜索时显示的结果中，非选中的其他词也会高亮，它们的face是有lazy-highlight控制的。
+当结束了搜索后，可以用C-s C-s或C-r C-r命令重复之前的搜索。The first `C-s' is the key that invokes incremental search, and the second `C-s' means "search again".
+
+在输入搜索词时，可以用M-p M-n来选择之前的搜索词；搜索过程中，可以用M-e临时修改搜索词。
+
+如果输入词是小写，则，the search is case-insensitive，如果有大写字符，则，the search is case-sensitive。
+
+最最重要的：在Incremental search状态下，输入C-h C-h显示帮助列表。
+
+在Incremental serach中，可以进行如下yank操作：
+C-y isearch-yank-killn
+M-y isearch-yank-pop
+C-w isearch-yank-word-or-char: appends the next character or word at point to the search string.
+M-s C-e isearch-yank-line: appends the rest of the current line to the search string.
+C-M-w delete the last charater from the search string
+C-M-y appends the character after point to the search string.
+
+当minibuffer激活的时候，c-s c-r也可以对minibuffer操作。M-r M-s对minibuffer进行regex search操作。
+
+<strong>Nonincremental Search:
+</strong>
+`C-s <RET> STRING <RET>'
+     Search for STRING.
+
+`C-r <RET> STRING <RET>'
+
+<strong>Word Search:
+</strong>`M-s w'
+     If incremental search is active, toggle word search mode
+     (`isearch-toggle-word'); otherwise, begin an incremental forward
+     word search (`isearch-forward-word').
+
+`M-s w <RET> WORDS <RET>'
+     Search for WORDS, using a forward nonincremental word search.
+
+`M-s w C-r <RET> WORDS <RET>'
+     Search backward for WORDS, using a nonincremental word search.
+
+<strong>Regular Expression Search
+</strong>`C-M-s'
+     Begin incremental regexp search (`isearch-forward-regexp').
+
+`C-M-r'
+     Begin reverse incremental regexp search
+     (`isearch-backward-regexp').
+
+<strong>Searching and Case:
+</strong>Typing `M-c' within an incremental search toggles the case sensitivity of that search.
+
+<strong>Replace:
+</strong>Simple replace: M-x replace-string
+Regexp replace: M-x replace-regex
+Query replace: M-%
+Regexp Query replace: C-M-%
