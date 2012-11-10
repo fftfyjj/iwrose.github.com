@@ -34,7 +34,9 @@ markdown mode的安装具体可以参考<http://linuxtoy.org/archives/emacs-mark
 但是，Emacs采用何种markdown解释器还是得好好考虑的，必须保证解释的效果是和jekyll解释的效果一致。个人建议直接采用jekyll的解释器来作Emacs写作时预览所用的解释器。在jekyll中，默认的是Maruku，可以选择速度更快的C语言实现的RDiscount。  
 `ln -s \usr\bin\rdiscount \usr\bin\markdown`
 
-
+##Migrate from WordPress to Jekyll
+各种迁移方法可见[官方文档](https://github.com/mojombo/jekyll/wiki/blog-migrations)。 
+我用的是Exitwp工具，具体操作方法在其项目主页上有说明。
 
 ##一些喜好jekyll的博客
 LevanLifan <http://levanlifan.diandian.com/>  
