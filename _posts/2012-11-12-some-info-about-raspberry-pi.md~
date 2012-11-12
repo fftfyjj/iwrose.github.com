@@ -1,0 +1,8 @@
+---
+layout: post
+title: "Some Info About Raspberry Pi"
+description: ""
+category: 
+tags: []
+---
+{% include JB/setup %}
