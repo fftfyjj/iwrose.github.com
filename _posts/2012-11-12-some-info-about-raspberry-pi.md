@@ -12,9 +12,9 @@ tags: []
 Raspberry Pi是一款基于Linux系统的个人电脑，配备一枚700MHz的处理器，256内存，支持SD卡和Ethernet，拥有两个USB接口，以及 HDMI和RCA输出支持。有消息称，虽然Raspberry Pi看起来非常的迷你——只有一张信用卡大小，但是它能够运行像《雷神之锤三：竞技场》这样的游戏和进行1080p视频的播放。硬件基础是 ARM，操作系统采用开源的 Linux 系统，自带的 Iceweasel、KOffice 等软件能够满足基本的网络浏览，文字处理以及计算机学习的需要。 [管网](http://www.raspberrypi.org/)
 ###Raspberry Pi的型号及详细配置？
 主板构图： 
-![主板构图]({{ BASE_PATH}}/_post/i1.jpg)  
+![主板构图]({{ BASE_PATH}}/media/i1.jpg)  
 详细配置：
-![详细配置]({{ BASE_PATH}}/_post/i2.png)
+![详细配置]({{ BASE_PATH}}/media/i2.png)
 ###Raspberry Pi的创新DIY
 [国外工程师用纸板做了一个树莓派（Raspberry Pi）外壳](http://www.eeboard.com/bbs/thread-2725-1-1.html)  
 [把Raspberry Pi装入Cherry键盘 再现apple II ](http://www.eeworld.com.cn/manufacture/2012/0830/article_7896.html)  
