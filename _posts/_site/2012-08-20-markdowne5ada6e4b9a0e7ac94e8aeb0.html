@@ -1,0 +1,263 @@
+<blockquote>
+<p>这是前段时间学习Markdown时记录的笔记，该语法与Mou编辑器兼容</p>
+</blockquote>
+
+<h1 id='markdown'>Markdown学习笔记</h1>
+
+<blockquote>
+<p>注意一点，不要在块级HTML元素内使用Markdown格式化命令，Markdown不会处理它们。比如你不要</p>
+</blockquote>
+
+<p>在一个HTML块中使用 <em>emphasis</em> 这样的Markdown格式化命令。</p>
+
+<p>Markdown中，以下字符支持使用反斜线转义：</p>
+
+<blockquote>
+<blockquote>
+<p>\ 反斜线</p>
+</blockquote>
+</blockquote>
+
+<p>` 反引号</p>
+
+<p>* 星号</p>
+
+<p>_ 下划线</p>
+
+<p>{} 大括号</p>
+
+<p>[] 中括号</p>
+
+<p>() 小括号</p>
+
+<p># 井号</p>
+
+<p>+ 加号</p>
+
+<p>- 减号（连字符）</p>
+
+<p>. 句点</p>
+
+<p>! 感叹号</p>
+
+<blockquote />
+
+<h2 id='id9'>块级元素</h2>
+
+<blockquote>
+<p>注意，该类元素前后得有空行隔开。</p>
+</blockquote>
+
+<h3 id='id10'>段落与换行</h3>
+
+<p>段落间用一个～多个空行隔开。</p>
+
+<p>换行用&gt;2个空格加换行符隔开。</p>
+
+<h3 id='id11'>标题</h3>
+
+<p>有2种风格Setext与atx。</p>
+
+<h3 id='id12'>引用块</h3>
+
+<p>用邮件列表种的&gt;表示。</p>
+
+<h3 id='id13'>列表</h3>
+
+<p>* 无序用+、-、*加空格表示。</p>
+
+<p>* 有序用 数字 加 . 加 空格 表示。</p>
+
+<p>注意，如果每条列表包含多段内容，则每段开始前必须加tab或4个空格</p>
+
+<h3 id='id14'>代码块</h3>
+
+<p>代码块的书写很方便。每行前面tab就可以。发现不能支持_中文_（现在看来是之前的markdown pro软件本身的问题，用Mou的话非常的ok)。</p>
+
+<pre><code>&lt;code&gt;#include&lt;stdio.h&gt; void main(){ printf(&quot;Hello world.&quot;); return; } &lt;/code&gt;</code></pre>
+
+<h3 id='fenced'>Fenced代码块</h3>
+
+<p>用包含三个反引号的line括起来表示. <del>实际上我觉得这就是行内代码的一种，只是书写时变化了点而已。</del></p>
+
+<p>修正：的确与行内代码是不同的。 应该是代码段的一种更加方便的书写方法。</p>
+
+<p>另外，注意，该符号的书写必须满足两条件：</p>
+
+<p>1. 前面必须空一行 2. 前后符号必须各占单独的一行。</p>
+
+<h3 id='id15'>水平线</h3>
+
+<p>用3个以上-、*就会得到水平线，如：</p>
+<hr />
+<h3 id='tables'>Tables的书写</h3>
+
+<pre><code>&lt;code&gt;First Header|Second Header|Third Header :-----------|:-----------:|:---------- 第一项 |第二项 |第三项 第四项|第五项|第六项 &lt;/code&gt;</code></pre>
+
+<blockquote>
+<p>上面的这段文字，在Mou中的解释与github或Markdown Pro中的不同。</p>
+</blockquote>
+
+<p>First Header Second Header Third Header</p>
+
+<p>第一项</p>
+
+<p>第二项</p>
+
+<p>第三项</p>
+
+<p>第四项</p>
+
+<p>第五项</p>
+
+<p>第六项</p>
+
+<blockquote>
+<p>冒号表示对齐。可以写的好看点，但是为了大字方便，是没必要的。</p>
+</blockquote>
+
+<h2 id='id16'>行级元素</h2>
+
+<h3 id='id17'>链接</h3>
+
+<p>分为: * 行内链接 如: <a href='http://www.baidu.com'>百度</a>。即，格式为: <a href='%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80'>链接文本</a> * 引用链接</p>
+
+<blockquote>
+<p>还有种自动链接，直接用&lt; &gt;包含起来。如：<a href='http://www.baidu.com'>http://www.baidu.com</a> 。注意，必须写http。</p>
+</blockquote>
+
+<p>书写Email的话也用这种自动连接的方式：<a href='mailto:xxx@126.com'>xxx@126.com</a>。</p>
+
+<h3 id='id18'>强调</h3>
+
+<p>使用 *、_ 表示强调。如 <em>xx</em>。</p>
+
+<p>上面是斜体强调，还有种粗体强调用<code>**xx**, __xx__</code>的方法表示。 可以用\符号来转义。</p>
+
+<h3 id='id19'>删除线</h3>
+
+<p>使用2个～～符号包括起来表示。如：<del>我是要被删除的。</del></p>
+
+<h3 id='id20'>行内代码</h3>
+
+<p>用反引号来包含起来。</p>
+
+<blockquote>
+<p>要在一个行内代码中使用反引号（`）本身，用多个反引号作为定界符包住它：</p>
+</blockquote>
+
+<p><code>There is a literal backtick (`) here.</code></p>
+
+<h3 id='id21'>图片</h3>
+
+<p>* 行内图片</p>
+
+<p><code>![Alt text](/path/to/img.jpg)</code></p>
+
+<p><code>![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</code></p>
+
+<p>* 引用图片</p>
+
+<p><code>![Alt text][id]</code></p>
+
+<p><code>[id]: url/to/image &quot;Optional title attribute&quot;</code></p>
+
+<h2 id='id22'>补充知识</h2>
+
+<p>MultiMarkdown针对Markdown的某些缺失的功能，所设计的超集。</p>
+
+<p>支持的语法有：</p>
+
+<blockquote />
+
+<blockquote />
+
+<blockquote>
+<p>* footnotes</p>
+</blockquote>
+
+<blockquote>
+<p>* tables</p>
+</blockquote>
+
+<blockquote>
+<p>* citations and bibliography (works best in LaTeX using BibTeX)</p>
+</blockquote>
+
+<blockquote>
+<p>* math support</p>
+</blockquote>
+
+<blockquote>
+<p>* automatic cross-referencing ability</p>
+</blockquote>
+
+<blockquote>
+<p>* smart typography, with support for multiple languages</p>
+</blockquote>
+
+<blockquote>
+<p>* image attributes</p>
+</blockquote>
+
+<blockquote>
+<p>* table and image captions</p>
+</blockquote>
+
+<blockquote>
+<p>* definition lists</p>
+</blockquote>
+
+<blockquote>
+<p>* glossary entries (LaTeX only)</p>
+</blockquote>
+
+<blockquote>
+<p>* document metadata (e.g. title, author, date, etc.)</p>
+</blockquote>
+
+<p>另外，Markdown Extra也是类似的Markdown超集。 支持的语法有：</p>
+
+<blockquote />
+
+<blockquote />
+
+<blockquote>
+<p>* Inline HTML</p>
+</blockquote>
+
+<blockquote>
+<p>* Markdown Inside HTML Blocks</p>
+</blockquote>
+
+<blockquote>
+<p>* Header Id Attribute</p>
+</blockquote>
+
+<blockquote>
+<p>* Fenced Code Blocks</p>
+</blockquote>
+
+<blockquote>
+<p>* Tables</p>
+</blockquote>
+
+<blockquote>
+<p>* Definition Lists</p>
+</blockquote>
+
+<blockquote>
+<p>* Footnotes</p>
+</blockquote>
+
+<blockquote>
+<p>* Abbreviations</p>
+</blockquote>
+
+<blockquote>
+<p>* Emphasis</p>
+</blockquote>
+
+<blockquote>
+<p>* Backslash Escapes</p>
+</blockquote>

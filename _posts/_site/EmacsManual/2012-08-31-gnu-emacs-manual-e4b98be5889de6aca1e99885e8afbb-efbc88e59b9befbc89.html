@@ -1,0 +1,57 @@
+<p>前面的文章已经将Emacs的基础概念介绍完毕，现在开始进入EMacs的编辑命令的学习。 先学习下Basic Editing Commands，这大概也就是Emacs Tutorial的内容。也是大多是初学习必须掌握的知识，学完这一节就可以完成日程的基础编辑工作了。 <strong>Inserting Text:</strong> 在这节Emacs manual又将charater分为graphic charater 和 nongraphic charater，而前面所说的却是simple character 和control charater。这点让我还是有些迷惑,找了找wikipedia，也没找到啥标准的称呼，暂且标记下来。</p>
+
+<p>C-q可以用来插入nongraphic character, 还可以: &#8216;C-q&#8217; followed by a sequence of octal digits inserts the character with the specified octal character code.（默认是八进制，不过可以通过设置 read-quoted-char-radix变量为十或十六进制） 另外，Instead of &#8216;C-q&#8217;, you can use the command &#8216;C-x 8 &#8217; (&#8216;ucs-insert&#8217;).</p>
+
+<p>Changing the Location of Point <strong>这节就是告诉你如何移动光标。不细说了。只列举一般教程中都没介绍的keys.</strong>M-r : move-to-window-line-top-bottom M-g g 或 M-g M-g: goto-line</p>
+
+<p>When a line of text in the buffer is longer than the width of the window, Emacs usually displays it on two or more &#8220;screen lines&#8221;. C-n C-p命令是操作在screen lines基础上，而其他的命令则是针对的logical line。 可以设置line-move-visual为nil, 使得c-n c-p命令也是针对logical line。</p>
+
+<p><strong>Erasing Text</strong>基础，此节忽略。</p>
+
+<p><strong>Undoing Changes</strong>undo的快捷键有3个。</p>
+
+<p><strong>Files &amp; Help</strong>忽略，help在后面详细讲解</p>
+
+<p><strong>Blank Lines</strong>C-o命令本质是：在光标处插入2个newline，光标再移到空行首。 用c-x c-o删除一空行或多个连在一起的空行。</p>
+
+<p><strong>Continuation Lines</strong>默认的情况，句子太长的话，emcas可能the wrapping发生在单词中间，这样会严重影响阅读。在编写文字时，可以通过Auto Fill mode来让Emacs自动插入newline。 另一种情况是，你需要修改包含很多长句子的文本。这样auto fill mode就没用了，因为文章已经是完成状态。这时就需要Visual Line mode，自动在词间wrap。 Emacs can optionally &#8220;truncate&#8221; long logical lines instead of continuing them.</p>
+
+<p><strong>Cursor Position Informaiton</strong> 掌握了解如下命令，还是会有些用处的。例如，统计字数，查看字符的character code，即character encoding。关于什么是character encoding, 参见这篇文章：<a href='http://www.iwrose.com/?p=146'>http://www.iwrose.com/?p=146</a></p>
+
+<blockquote>
+<p>&#8216;M-x what-line&#8217;</p>
+</blockquote>
+
+<pre><code> Display the line number of point.</code></pre>
+
+<p>&#8216;M-x line-number-mode&#8217; &#8216;M-x column-number-mode&#8217; Toggle automatic display of the current line number or column number.</p>
+
+<p>&#8216;M-=&#8217; Display the number of lines, words, and characters that are present in the region (&#8216;count-words-region&#8217;). for information about the region.</p>
+
+<p>&#8216;M-x count-words&#8217; Display the number of lines, words, and characters that are present in the buffer. If the region is active display the numbers for the region instead.</p>
+
+<p>&#8216;C-x =&#8217; Display the character code of character after point, character position of point, and column of point (&#8216;what-cursor-position&#8217;).</p>
+
+<p>&#8216;M-x hl-line-mode&#8217; Enable or disable highlighting of the current line.</p>
+
+<p>&#8216;M-x size-indication-mode&#8217; Toggle automatic display of the size of the buffer.</p>
+
+<p><strong>Numeric Arguments</strong> 有两种输入方式：</p>
+
+<blockquote>
+<p>Instead of typing &#8216;M-1&#8217;, &#8216;M-2&#8217;, and so on, another way to specify a</p>
+</blockquote>
+
+<p>numeric argument is to type &#8216;C-u&#8217; (&#8216;universal-argument&#8217;) followed by some digits, or (for a negative argument) a minus sign followed by digits.</p>
+
+<dl>
+<dt><strong>Repeating a Command</strong></dt>
+
+<dt>用数字参数可以让某些命令重复N次，但是如果数字参数别有用处的时候，此方法就不行了。</dt>
+
+<dt>这时，用C-x z命令可以完成重复操作。z的个数表明重复次数。不过该命令前也可以通过加数字参数来实现指定次数的重复操作。</dt>
+
+<dd>
+<p>) End!</p>
+</dd>
+</dl>

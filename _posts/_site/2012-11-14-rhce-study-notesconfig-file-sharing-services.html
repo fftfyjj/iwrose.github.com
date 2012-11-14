@@ -1,0 +1,49 @@
+<p>Liquid error: No such file or directory - /home/negatlov/iwrose.github.com/_posts/_includes 本章知识主要来源Chapter 1</p>
+
+<h3 id='general_file_sharing_services_configure_steps'>General File Sharing Services Configure Steps:</h3>
+
+<ol>
+<li>Install</li>
+
+<li>Config</li>
+
+<li>Copy</li>
+
+<li>Chcon</li>
+
+<li>Start</li>
+
+<li>Autostart</li>
+</ol>
+
+<h3 id='apache_server'>Apache Server</h3>
+
+<ol>
+<li>Install: yum install httpd</li>
+
+<li>Config: /etc/httpd/conf/</li>
+
+<li>Copy: copy files to /var/www/html</li>
+
+<li>Chcon: chcon -R &#8211;reference=/var/www/html /var/www/html/<em>.</em></li>
+
+<li>Start: /etc/init.d/httpd start</li>
+
+<li>Autostart: chkconfig httpd on</li>
+</ol>
+
+<h3 id='vsftp_server'>VSFtp Server</h3>
+
+<ol>
+<li>Install: yum install vsftpd</li>
+
+<li>Config: /etc/vsftp/</li>
+
+<li>Copy: copy files to /var/ftp/pub/</li>
+
+<li>Chcon: chcon -R &#8211;reference=/var/ftp/pub /var/ftp/pub/<em>.</em></li>
+
+<li>Start: /etc/init.d/vsftpd start</li>
+
+<li>Autostart: chkconfig vsftpd on</li>
+</ol>
