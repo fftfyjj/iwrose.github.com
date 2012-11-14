@@ -20,9 +20,9 @@ SendEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
 SendEnv LC_IDENTIFICATION LC_ALL`
 : allow the client to set several environmental variables. 
 
-### 2.SSH Commands
-$ ssh root@server1.example.com 
-$ ssh -l root server1.example.com 
+### 2.SSH Commands  
+$ ssh root@server1.example.com  
+$ ssh -l root server1.example.com  
 \# scp F02-20.tif michael@server1:/home/michael/RHbook/Chapter2/ 
 
 ---此文待补充。
