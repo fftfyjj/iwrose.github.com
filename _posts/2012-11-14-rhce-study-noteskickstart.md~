@@ -1,0 +1,8 @@
+---
+layout: post
+title: "RHCE Study Notes:Kickstart"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
