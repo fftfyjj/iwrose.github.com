@@ -1,0 +1,23 @@
+---
+layout: post
+title: "RHCE Study Notes: Network & Troubleshooting"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
+###Troubleshooting
+遇到本地网络问题时，可以做的事情： 
+
++ Check the current status of the network: `/etc/init.d/network status`
++ Restart network: `/etc/init.d/network restart`
++ Check configure file /etc/sysconfig/network
++ Check files in /etc/sysconfig/network-scripts
+
+###Configure files about Network
++ /etc/sysconfig/network： 决定是否开启网络，/etc/init.d/network脚本会最先检查这个配置文件，决定是否使用网络。同时，在系统启动阶段会根据该文件中的主机名决定系统的主机名。
++ /etc/sysconfig/network-scripts：
++ /etc/resolv.conf: 记录DNS服务器，一般由dhclient获取DNS后保存到该文件中。
++ /etc/hosts
++ /etc/nsswitch.conf
++ /etc/
