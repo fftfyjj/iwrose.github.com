@@ -1,0 +1,30 @@
+n---
+layout: post
+title: "RHCE Study Notes: VNC"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
+There are three kinds of vnc server in RHEL 6: 
+
++ display associated with a KVM-based virtual machine.
++ GNOME-based VNC server: vino.
++ TigerVNC server. 
+
+###Install & Configure a TigerVNC Server 
+1. Install 
+yum install vinagre tigervnc tigervnc-server  
+2. Configure 
+/etc/sysconfig/vncserver  
+change to the user home directory, then set vncpasswd.(it's neccessary)  
+3. Start 
+First stop vncserver, Then start it:  
+/etc/init.d/vncserver start   
+service vncserver start 
+4. Another Quick Method to Start vncserver 
+run `vncserver :port` in the user home directory, then enter password twice.(But pay attention, root account doesn't need enter password). 
+
+###Client Usage
+If service is ok, then using `vncviewer ip_address:port`(such as, vncviewer 127.0.0.1:2)  
+Beware: 防火墙必须保证支持VNC连接。
