@@ -43,5 +43,9 @@ vncviewer -via apple@192.168.0.2 192.168.0.2:1
 >Use "-localhost" to prevent remote VNC clients connecting except when doing so through a secure tunnel.  See the "-via" option in the `man vncviewer' manual page.  
 >Use "-nolisten tcp" to prevent X connections to your VNC server via TCP.
 
+在书中Chapter 9里面有介绍另外的一种方法：
 
+1. 在客户端使用SSH命令和服务器端建立隧道连接。例如：  
+ssh -L 5903:server\_ip:5903 username@server\_ip
+2. 运行vncviewer ip\_address:port 命令建立到服务器的连接。
 
