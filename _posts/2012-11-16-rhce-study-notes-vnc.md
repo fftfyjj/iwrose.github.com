@@ -49,3 +49,14 @@ vncviewer -via apple@192.168.0.2 192.168.0.2:1
 ssh -L 5903:server\_ip:5903 username@server\_ip
 2. 运行vncviewer ip\_address:port 命令建立到服务器的连接。
 
+### Configure files in User Home
+There are four kinds of files:
+
++ password
++ log file
++ process identifier (PID) file  
+provides information on what happened, and what is happening with the connection. 
++ configuration file  
+preconfigured to start the local default desktop environment.
+
+
