@@ -1,0 +1,11 @@
+---
+layout: post
+title: "RHCE Study Notes: All About iptables (资源收集)"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
+今天一天就花在iptables上了，本来在看资料时，以为iptables很简单，却没想到越看越模糊，现在暂时是没法用自己的语言来表达自己对iptables的了解。 不过在网络上找到不少关于iptables的各类资料,统一都收集在自己这个帖子中。
+![]({{site.url}}/media/111701.png)  
+![]({{site.url}}/
