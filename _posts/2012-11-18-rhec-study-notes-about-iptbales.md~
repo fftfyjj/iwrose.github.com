@@ -1,0 +1,10 @@
+---
+layout: post
+title: "RHEC Study Notes: About iptbales"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
+这是依据iptables tutorial文档，自己理解的数据包的流程。 
+![图]({{site.url}}/media/111802.png) 
