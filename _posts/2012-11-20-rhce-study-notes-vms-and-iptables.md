@@ -113,7 +113,8 @@ Nov 21 22:15:52 localhost kernel: [nat_postrouting]IN= OUT=eth1 PHYSIN=vnet0 SRC
 Nov 21 22:15:52 localhost kernel: [filter-forward]IN=eth1 OUT=virbr0 SRC=192.168.1.102 DST=192.168.122.176 LEN=84 TOS=0x00 PREC=0x00 TTL=63 ID=15138 PROTO=ICMP TYPE=0 CODE=0 ID=386 SEQ=1 
 </pre>
 ####总结
-还需要具体的弄明白KVM的nat到底怎么回事
+还需要具体的弄明白KVM的nat到底怎么回事  
+如果关闭防火墙，虚拟机为什么不能访问外网？
 
 ####参考链接
 <http://www.linuxidc.com/Linux/2012-05/61445.htm>
