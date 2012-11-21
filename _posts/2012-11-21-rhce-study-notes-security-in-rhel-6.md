@@ -1,0 +1,103 @@
+---
+layout: post
+title: "RHCE Study Notes: Security In RHEL 6"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
+这篇博文主要参考 Red Hat Enterprise Linux 6 Security Guide文档。  
+Computer security is often divided into three distinct master categories, commonly referred to as controls:
+
++ Physical
++ Technical
++ Administrative
+
+主要的关注点是Technical Controls.
+
+要保证网络的安全，需要从以下几个方面来探索： 
+
++ Workstation Security
++ Server Security
++ Single Sign-on
++ PAM
++ Kerberos
++ TCP Wrappers & Xinet
++ VPN
++ Firewalls
+
+####Xinet
+Xinet是一种Super daemon。具体什么是Super daemon在\<鸟哥的Linux私房菜\--基础学习篇\>中有介绍：
+>在一般正常的Linux系统环境下，服务的启动与管理主要有两种方式： 
+>
+>stand alone：顾名思义，stand alone就是直接执行该服务的可执行程序（执行档），让该可执行程序（执行档）直接载入到内存当中运作，用这种方式来启动可以让该服务具有较快速回应的优点。一般来说，这种服务的启动script都会放置到/etc/init.d/这个目录底下（貌似 Red Hat系统是放到/etc/rc.d/init.d里面的），所以你通常可以使用：『 /etc/init.d/sshd restart 』之类的方式来启动这种服务（sshd是一个应用程序）；  
+>
+>Super daemon Super daemon：用一个超级服务作为总管，以管理一些网络服务。在CentOS 4.x 里面使用的则是xinetd 这个 super daemon！这种方式启动的网路服务虽然在回应上速度会比较慢，不过，可以透过super daemon额外提供一些控管，例如控制何时启动、何时可以进行连线、那个IP可以连进来、是否允许同时连线等等。通常设定档放置在/etc/xinetd.d/当中，但设定完毕后需要重新以『 /etc/init.d/xinetd restart 』重新来启动才行！ 
+
+另外，xient服务的开启主要有三种方式，以telnet-server为例。
+
++ System->Administration->Services 中，在On Demand Services中选中telnet，并在Background Services中选中xinetd，并点击上面的Start，即在右侧显示：xinetd (pid  15986) is running... 最后Save & Quit.
++ 编辑/etc/xinetd.d/telnet, 将其中的 disable = yes 的yes改为no. 然后 service xinetd restart.
++ 使用chkconfig命令直接开启, 然后service xinetd restart.
+
+####TCP Wrappers
+**TCP Wrappers的原理：**  
+>When a system receives a network request for a service linked to the libwrap.so.0 library, it passes the request on to TCP Wrappers. This system logs the request and then checks its access rules. If there are no limits on the particular host or IP address, TCP Wrappers passes control back to the service.
+
+**Q：如何判断一个服务是否被TCP Wrapper保护？ **
+
+1. strings /sbin/server\_program |grep hosts\_access 
+2. ldd /sbin/server\_program |grep libwrap.so.0
+
+**TCP Wrappers的处理流程：**  
+
+1. It searches /etc/hosts.allow. If TCP Wrappers finds a match, it grants access. No additional searches are required.
+2. It searches /etc/hosts.deny. If TCP Wrappers finds a match, it denies access.
+3. If the host isn’t found in either file, access is automatically granted to the client.
+
+**Sample Commands in /etc/hosts.allow and /etc/hosts.deny**  
+![]({{site.url}}/media/112101.png)
+
+**TCP Wrapper是如何与Xinet结合保护服务的**  
+![]({{site.url}}/media/112102.png)
+
+####PAM
+主要的优势是，**将系统中的服务的认证程序从服务程序本身独立出来**。其架构图如下：  
+![]({{site.url}}/media/112103.gif)  
+a. 系统管理员通过PAM配置文件来制定认证策略，即指定什么服务该采用什么样的认证方法；   
+b. 应用程序开发者通过在服务程序中使用PAM API而实现对认证方法的调用；  
+c. 而PAM服务模块（service module）的开发者则利用PAM SPI（Service Module API）来编写认证模块（主 要是引出一些函数pam_sm_xxxx( )供libpam调用），将不同的认证机制（比如传统的UNIX认证方法、Kerberos等）加入到系统中；  
+d. PAM核心库（libpam）则读取配置文件，以此为根据将服务程序和相应的认证方法联系起来。 
+
+PAM中Control Flags的流程：  
+![]({{site.url}}/media/112104.png)  
+
+关于PAM的更加详细的介绍可以看此文章，[PAM入门介绍,作者netguy](http://doc.linuxpk.com/5209.html)，写的非常好。
+
+**一个例子：**  
+默认情况下，系统只允许普通用户telnet登录，不允许root用户登录。为什呢？  
+*因为对于root用户，login程序调用PAM验证时会用pam\_securetty模块，而该模块则会查看/etc/securetty文件，如果登录的终端名不在文件中，则会禁止登陆。通过查看日志文件/var/log/secure, 可以看到 access denied: tty 'pts/1' is not secure !*  
+如何解决？  
+方法一： mv /etc/securetty /etc/securetty.bak   
+方法二：修改/etc/pam.d/remote，注释掉：`auth       required     pam_securetty.so`  
+
+####GPG
+What is GPG?  
+The computer standard for file encryption is known as Pretty Good Privacy(PGP), the open source implementation of PGP is known as GNU Privacy Guard(GPG).  
+
+关于GPG的一个简单的用于加密解密过程： 
+
+1. Generate key: gpg --gen-key 
+2. View key: gpg --list-key
+3. Export public key & send to other(for example, user B): gpg --export > gpg.pub
+4. User B import public key: gpg --import gpg.pub
+5. User B encrypt a file & send to User A: gpg --out encrypted.file --recipient 'iwrose' --encrypt file
+6. User A decrypt the file: gpg --out decrypted.file --decrypt encrypted.file
+
+具体的关于GPG更加详细的原理技术以后再学习。
+
+####参考链接,在此特别感谢这些网站及作者
+[Oracle Solaries管理：安全服务](http://docs.oracle.com/cd/E26926_01/html/E25889/toc.html) 虽然是介绍的Solaris系统，但是全中文的关于安全服务的知识还是非常有吸引力的。 
+[单点登录技术谈](http://www.ibm.com/developerworks/cn/security/se-sso/index.html) 需要学习的一个技术。  
+[第十四章、Linux 帳號管理與 ACL 權限設定 鳥哥的 Linux 私房菜](http://linux.vbird.org/linux_basic/0410accountmanager.php) 有点明白鸟哥的书为什么卖的这么好了，果然不错，我要纠正我以前的片面认识。  
+<http://www.cnblogs.com/xlmeng1988/archive/2012/04/24/telnet-server.html>  
