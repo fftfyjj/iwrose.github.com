@@ -6,7 +6,7 @@ category: RHCE
 tags: []
 ---
 {% include JB/setup %}
-#### 背景条件
+### 背景条件
 机器包含的网卡有:
 
 + eth0 主机的物理网卡 192.168.1
@@ -14,7 +14,7 @@ tags: []
 
 虚拟网络通过NAT方式与主机连接。
 
-#### 利用syslog记录数据包通过iptables的流程
+### 利用syslog记录数据包通过iptables的流程
 修改/etc/rsyslog.conf文件： 
 添加一行代码： `kern.debug    /var/log/iptables` 将日志保存到/var/log/iptables文件.  
 建立如下脚本，并运行:  
@@ -25,7 +25,7 @@ tags: []
 `iptables -t nat -A OUTPUT -j LOG --log-prefix="[nat_output]" --log-level debug`  
 `iptables -t nat -A POSTROUTING -j LOG --log-prefix="[nat_postrouting]" --log-level debug`  
 
-####实验一
+###实验一
 在虚拟机(192.168.122.186)中telnet www.baidu.com 80  
 grep提取到的日志结果如下:  
 <pre>
@@ -78,7 +78,7 @@ Nov 20 15:51:12 negatlov kernel: filter_t FORWARD negatlovIN=eth0 OUT=virbr0 SRC
 Nov 20 15:51:12 negatlov kernel: filter_t FORWARD negatlovIN=virbr0 OUT=eth0 PHYSIN=vnet0 SRC=192.168.122.186 DST=119.75.218.77 LEN=40 TOS=0x10 PREC=0x00 TTL=63 ID=42089 DF PROTO=TCP SPT=1025 DPT=80 WINDOW=5840 RES=0x00 ACK URGP=0 
 </pre>
 
-####实验二（换了台机器）
+###实验二（换了台机器）
 Host IP: 192.168.1.101  
 VM IP: 192.168.122.176  
 在VM中ping 192.168.1.101, 得到如下日志： 
@@ -90,7 +90,7 @@ Nov 21 22:01:59 localhost kernel: [filter_output]IN= OUT=virbr0 SRC=192.168.1.10
 流程图： 
 ![]({{site.url}}/media/1121vm2host.png)
 
-####实验三
+###实验三
 Host IP: 192.168.1.101  
 VM IP: 192.168.122.176  
 在VM中ping 192.168.122.1, 得到如下日志： 
@@ -99,9 +99,12 @@ Nov 21 22:19:30 localhost kernel: [nat_prerouting]IN=virbr0 OUT= PHYSIN=vnet0 MA
 Nov 21 22:19:30 localhost kernel: [filter_input]IN=virbr0 OUT= PHYSIN=vnet0 MAC=52:54:00:ae:f2:2c:52:54:00:76:0b:a6:08:00 SRC=192.168.122.176 DST=192.168.122.1 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=0 DF PROTO=ICMP TYPE=8 CODE=0 ID=389 SEQ=1 
 Nov 21 22:19:30 localhost kernel: [filter_output]IN= OUT=virbr0 SRC=192.168.122.1 DST=192.168.122.176 LEN=84 TOS=0x00 PREC=0x00 TTL=64 ID=37844 PROTO=ICMP TYPE=0 CODE=0 ID=389 SEQ=1 
 </pre>
-可以发现，与实验二的结论一致。到底为什么这样需要想明白。。。
+可以发现，与实验二的结论一致。到底为什么这样需要想明白。。。  
+<font color="red">补充：KVM在NAT模式下，虚拟接口virbr0和eth0是相互独立的。它们之间的关系和真实路由器的不同以太网接口之间的关系类似，相互之间可以进行分组（数据包）的转发。   
+而在桥接模式下，虚拟接口和eth0之间是在第二层直接连接的。就像两个电脑通过交换机汇聚在一起，通过一根网线与外界通信。这样，两接口可以设置成同一网段的ip, 模拟两个独立的机器。
+</font>
 
-####实验四
+###实验四
 Host IP: 192.168.1.101  
 VM IP: 192.168.122.176  
 Host B IP: 192.168.1.102
@@ -112,9 +115,9 @@ Nov 21 22:15:52 localhost kernel: [filter-forward]IN=virbr0 OUT=eth1 PHYSIN=vnet
 Nov 21 22:15:52 localhost kernel: [nat_postrouting]IN= OUT=eth1 PHYSIN=vnet0 SRC=192.168.122.176 DST=192.168.1.102 LEN=84 TOS=0x00 PREC=0x00 TTL=63 ID=0 DF PROTO=ICMP TYPE=8 CODE=0 ID=386 SEQ=1 
 Nov 21 22:15:52 localhost kernel: [filter-forward]IN=eth1 OUT=virbr0 SRC=192.168.1.102 DST=192.168.122.176 LEN=84 TOS=0x00 PREC=0x00 TTL=63 ID=15138 PROTO=ICMP TYPE=0 CODE=0 ID=386 SEQ=1 
 </pre>
-####总结
-还需要具体的弄明白KVM的nat到底怎么回事  
-如果关闭防火墙，虚拟机为什么不能访问外网？
+###总结
+还需要具体的弄明白KVM的nat到底怎么回事...(见上面红色补充文字)
+如果关闭防火墙，虚拟机为什么不能访问外网？（RHEL中KVM的机制需要iptables来实现分组的nat）
 
-####参考链接
+###参考链接
 <http://www.linuxidc.com/Linux/2012-05/61445.htm>
