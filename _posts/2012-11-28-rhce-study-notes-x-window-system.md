@@ -22,3 +22,7 @@ xinitrc文件中，会调用执行Xclients脚本。 Xclients脚本中又调用gn
 ### GDM方式启动Gnome
 通过/etc/X11/prefdm脚本调用--\>gdm脚本调用--\>gdm-binary然后最终启动gnome-session。具体的流程没有仔细研究。
 
+### 参考链接
+<http://bbs.chinaunix.net/thread-2228608-1-1.html>  
+<http://wenku.baidu.com/view/9505d57101f69e3143329407.html>  
+<http://wenku.baidu.com/view/2867687d31b765ce0508147f.html>  
