@@ -24,3 +24,7 @@ description: ""
 
 ###网络书籍
 [GotGitHub](http://www.worldhello.net/gotgithub/index.html): 作者是《Git权威指南》一书的作者。本书介绍了Github的相关知识。可以了解。
+
+### Raspberry Pi
+[ICKey](http://www.ickey.cn/raspberry.php)： 国内电子产品代购商，包括raspberry pi。  
+[树莓派论坛](http://www.shumeipai.net/index.php) 
