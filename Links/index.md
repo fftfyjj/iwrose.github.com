@@ -27,4 +27,7 @@ description: ""
 
 ### Raspberry Pi
 [ICKey](http://www.ickey.cn/raspberry.php)： 国内电子产品代购商，包括raspberry pi。  
-[树莓派论坛](http://www.shumeipai.net/index.php) 
+[树莓派论坛](http://www.shumeipai.net/index.php)  
+[极客](http://www.geek-workshop.com/): Arduino相关，也有raspberry pi的内容。   
+[Raspberry Pi开源硬件知识库](http://kb.open.eefocus.com/index.php?title=Raspberry_Pi_-_ARM11L)   
+[某博客中Raspberry Pi相关](http://i2cq.com/category/digital)  
