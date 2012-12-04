@@ -31,3 +31,4 @@ description: ""
 [极客](http://www.geek-workshop.com/): Arduino相关，也有raspberry pi的内容。   
 [Raspberry Pi开源硬件知识库](http://kb.open.eefocus.com/index.php?title=Raspberry_Pi_-_ARM11L)   
 [某博客中Raspberry Pi相关](http://i2cq.com/category/digital)  
+[Raspberry Pi上手报告](http://www.leiphone.com/raspberry-pi-hands-on.html): 这篇文章写的很翔实，有价值。

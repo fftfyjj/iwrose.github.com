@@ -32,3 +32,9 @@ description: ""
 [Raspberry Pi开源硬件知识库](http://kb.open.eefocus.com/index.php?title=Raspberry_Pi_-_ARM11L)   
 [某博客中Raspberry Pi相关](http://i2cq.com/category/digital)  
 [Raspberry Pi上手报告](http://www.leiphone.com/raspberry-pi-hands-on.html): 这篇文章写的很翔实，有价值。
+
+
+### Linux学习站点
+[LinuxCast](http://www.linuxcast.net): 隆重推荐，很感谢站长视频  
+[nixcraft](www.cyberciti.biz)
+[scientificlinux](http://www.scientificlinux.org/) : 论坛文档不错
