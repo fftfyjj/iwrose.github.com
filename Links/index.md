@@ -38,3 +38,6 @@ description: ""
 [LinuxCast](http://www.linuxcast.net): 隆重推荐，很感谢站长视频  
 [nixcraft](www.cyberciti.biz)
 [scientificlinux](http://www.scientificlinux.org/) : 论坛文档不错
+
+### Linux资源
+[Installing VLC Player on RHEL 6.x & CentOS 6.x](http://ruyue318.i.sohu.com/blog/view/181911878.htm) : 很方便快捷到安装VLC到RHEL.
