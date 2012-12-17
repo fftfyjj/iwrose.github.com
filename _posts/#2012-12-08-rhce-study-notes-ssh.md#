@@ -1,0 +1,12 @@
+---
+layout: post
+title: "RHCE Study Notes: SSH"
+description: ""
+category: RHCE
+tags: []
+---
+{% include JB/setup %}
+### SSH
+Through secure authentication and encryption technologies, SSH supports secure remote logins, secure remote command execution, secure file transfers, access control, TCP/IP port forwarding, and other important features.
+
+iles. The most commonly used clients are ssh for remote login, and scp and sftp for file transfer. Authentication to the remote host can be accomplished using existing login passwords or with public-key cryptographic techniques. Passwords are more immediately and easily used, but public-key authentication is more flexible and secure. The ssh-keygen, ssh-agent, and ssh-add programs generate and manage SSH keys. 
